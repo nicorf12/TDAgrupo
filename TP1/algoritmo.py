@@ -11,7 +11,6 @@ def leer_archivo(nombre_archivo):
             datos.append((elemento1, elemento2))
     return datos
 
-
 def crear_arreglo_con_indice(arr):
     arreglo_con_indice = []
     for indice, valor in enumerate(arr):
@@ -20,6 +19,7 @@ def crear_arreglo_con_indice(arr):
 
 
 def minimizar_suma(batallas):
+    inicio = time.time()
     batallas_indices = crear_arreglo_con_indice(batallas)
     batallas_ordenadas = sorted(batallas_indices, key=lambda batalla: -(batalla[0][1] / batalla[0][0]))
     f = []
@@ -33,7 +33,9 @@ def minimizar_suma(batallas):
     for i in range(len(batallas_ordenadas)):
         coef_impacto += f[i] * batallas_ordenadas[i][0][1]
 
-    return coef_impacto, batallas_ordenadas
+    fin = time.time()
+    tiempo = (fin-inicio)*1000
+    return coef_impacto, batallas_ordenadas, tiempo
 
 
 def generar_batallas_random(tamanio):
@@ -90,11 +92,7 @@ def interaccion_con_senior_fuego():
 
 if __name__ == "__main__":
     batallas = interaccion_con_senior_fuego()
-    inicio = time.time()
     resultado = minimizar_suma(batallas)
-    fin = time.time()
     mostrar_orden_batallas(resultado[1])
     print("COEFICIENTE: ")
     print(resultado[0])
-    total = (fin - inicio) * 1000
-    print("TIEMPO TOTAL: " + str(total) + " milisegundos")
