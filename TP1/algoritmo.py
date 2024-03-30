@@ -29,13 +29,13 @@ def minimizar_suma(batallas):
         else:
             f.append(f[i - 1] + batallas_ordenadas[i][0][0])
 
-    coef_impacto = 0
+    suma_ponderada = 0
     for i in range(len(batallas_ordenadas)):
-        coef_impacto += f[i] * batallas_ordenadas[i][0][1]
+        suma_ponderada += f[i] * batallas_ordenadas[i][0][1]
 
     fin = time.time()
     tiempo = (fin-inicio)*1000
-    return coef_impacto, batallas_ordenadas, tiempo
+    return suma_ponderada, batallas_ordenadas, tiempo
 
 
 def generar_batallas_random(tamanio):
