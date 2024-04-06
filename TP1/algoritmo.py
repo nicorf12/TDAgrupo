@@ -41,8 +41,8 @@ def minimizar_suma(batallas):
 def generar_batallas_random(tamanio):
     batallas = []
     for i in range(tamanio):
-        t = random.randint(1, 1000)
-        b = random.randint(0, 1000)
+        t = random.uniform(0, 100000)
+        b = random.uniform(0, 100000)
         batallas.append((t, b))
     return batallas
 
@@ -96,3 +96,4 @@ if __name__ == "__main__":
     mostrar_orden_batallas(resultado[1])
     print("COEFICIENTE: ")
     print(resultado[0])
+     

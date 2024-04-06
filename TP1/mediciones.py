@@ -30,7 +30,7 @@ tiempos.append(algoritmo.minimizar_suma(algoritmo.leer_archivo(RUTA_1000000))[2]
 tiempos.append(algoritmo.minimizar_suma(algoritmo.leer_archivo(RUTA_10000000))[2])
 valores = [10,50,100,500,1000,5000,10000,50000,100000,500000,1000000,10000000]
 
-with open("archivos/mediciones.txt", "w") as archivo:
+with open("archivos/mediciones.txt", "a") as archivo:
     archivo.write("valores | tiempo tardado\n")
     for i in range(len(valores)):
         archivo.write(str(valores[i]) + "," + str(tiempos[i]) + "\n")
