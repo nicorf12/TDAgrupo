@@ -41,8 +41,8 @@ def minimizar_suma(batallas):
 def generar_batallas_random(tamanio):
     batallas = []
     for i in range(tamanio):
-        t = random.uniform(0, 100000)
-        b = random.uniform(0, 100000)
+        t = random.uniform(1, 10000)
+        b = random.uniform(0, 10000)
         batallas.append((t, b))
     return batallas
 
