@@ -1,6 +1,34 @@
 import sys
+import random
 
-def algoritmo(rafagas:list[int], j:int, f:list[int]):
+def generar_datos_aleatorios(n, f_cste,soldados_cste):
+    f = [random.randint(1, n)]
+    for _ in range(n-1):
+        f_anterior = f[-1]
+        if f_cste:nueva_f = f_anterior
+        else:nueva_f = random.randint(f_anterior, f_anterior + f_anterior//2)
+        f.append(nueva_f)
+
+    if soldados_cste: rafagas = [random.randint(10, 200)]*n
+    else: rafagas = [random.randint(10, 200) for _ in range(n)]
+
+    rafagas.insert(0,0)
+    f.insert(0,0)
+    return rafagas, n, f
+
+def crear_archivo_datos_aleatorios(n):
+    rafagas,_,f = generar_datos_aleatorios(n)
+
+    with open(f"{n}.txt", 'w') as archivo:
+        archivo.write(f"#{n} batallas\n")
+        for soldados in rafagas:
+            archivo.write(f"{soldados}\n")
+        for energia in f:
+            archivo.write(f"{energia}\n")
+
+    print(f"Archivo {n} creado con éxito.")
+
+def cargasOptimasDinamica(rafagas:list[int], j:int, f:list[int]):
     posibilidad = []
     for _ in range(j+1):
         posibilidad.append([0]*(j+1))
@@ -38,7 +66,7 @@ def main(archivo):
         f = [int(archivo.readline().strip()) for _ in range(j)]
         f.insert(0,0)
 
-    orden_ataques, tropa_eliminadas=algoritmo(rafagas,j,f)
+    orden_ataques, tropa_eliminadas=cargasOptimasDinamica(rafagas,j,f)
     print(f"Estrategia: {orden_ataques}.\nCantidad de tropas eliminadas: {tropa_eliminadas}.")
 
 if __name__ == "__main__":
