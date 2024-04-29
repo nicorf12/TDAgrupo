@@ -28,6 +28,21 @@ def crear_archivo_datos_aleatorios(n):
 
     print(f"Archivo {n} creado con éxito.")
 
+def reconstruir_solucion(posibilidad, maxs, j):
+    ataques = []
+    k = len(posibilidad) - 1
+    while k > 0:
+        ataques.insert(0,k)
+        k = k - maxs[k]
+
+    solucion = []
+    for i in range(1, j + 1):
+        if i in ataques:
+            solucion.append("ATACAR")
+        else:
+            solucion.append("CARGAR")
+    return solucion
+
 def cargasOptimasDinamica(rafagas:list[int], j:int, f:list[int]):
     posibilidad = []
     for _ in range(j+1):
@@ -40,21 +55,7 @@ def cargasOptimasDinamica(rafagas:list[int], j:int, f:list[int]):
         maxs[k] = posibilidad[k].index(max(posibilidad[k]))
 
     valor_max = posibilidad[len(posibilidad)-1][maxs[len(posibilidad)-1]]
-    
-    ataques = []
-    k = len(posibilidad)-1
-    while k > 0:
-        ataques.append(k)
-        k = k-maxs[k]
-
-    solucion = ""
-    for i in range(1,j+1):
-        if i in ataques:
-            solucion+="ATACAR, "
-        else:
-            solucion+="CARGAR, "
-
-    return solucion[:-2],valor_max
+    return reconstruir_solucion(posibilidad, maxs, j), valor_max
 
 
 def main(archivo):
