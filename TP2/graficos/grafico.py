@@ -3,7 +3,7 @@ import numpy as np
 import timeit
 import matplotlib.pyplot as plt
 
-from algoritmo import cargasOptimasDinamica,generar_datos_aleatorios,crear_archivo_datos_aleatorios
+from TP2.algoritmo import cargasOptimasDinamica,generar_datos_aleatorios,crear_archivo_datos_aleatorios
 
 plt.rc('font', size=15)
 CANTIDADES_A_PROBAR = range(10, 5001, 500)
