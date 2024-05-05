@@ -5,22 +5,22 @@ def generar_datos_aleatorios(n, f_cste,soldados_cste):
     f = [random.randint(1, n)]
     for _ in range(n-1):
         f_anterior = f[-1]
-        if f_cste:nueva_f = f_anterior
-        else:nueva_f = random.randint(f_anterior, f_anterior + f_anterior//2)
+        if f_cste:nueva_f = f_anterior 
+        else:nueva_f = f_anterior + random.randint(0, 5)
         f.append(nueva_f)
 
-    if soldados_cste: rafagas = [random.randint(10, 200)]*n
-    else: rafagas = [random.randint(10, 200) for _ in range(n)]
+    if soldados_cste: rafagas = [random.randint(10,200)]*(n)
+    else: rafagas = [random.randint(0,f[-1]) for _ in range(n)]
 
-    rafagas.insert(0,0)
-    f.insert(0,0)
+    
     return rafagas, n, f
 
 def crear_archivo_datos_aleatorios(n):
-    rafagas,_,f = generar_datos_aleatorios(n)
+    rafagas,_,f = generar_datos_aleatorios(n,False,False)
 
-    with open(f"{n}.txt", 'w') as archivo:
-        archivo.write(f"#{n} batallas\n")
+    with open(f"./sets/{n}.txt", 'w') as archivo:
+        archivo.write(f"#{n} rafagas\n")
+        archivo.write(f"{n}\n")
         for soldados in rafagas:
             archivo.write(f"{soldados}\n")
         for energia in f:
@@ -44,6 +44,8 @@ def reconstruir_solucion(posibilidad, maxs, j):
     return solucion
 
 def cargasOptimasDinamica(rafagas:list[int], j:int, f:list[int]):
+    rafagas.insert(0,0)
+    f.insert(0,0)
     posibilidad = []
     for _ in range(j+1):
         posibilidad.append([0]*(j+1))
@@ -67,9 +69,7 @@ def main(archivo):
         next(archivo)
         j =  int(archivo.readline().strip())
         rafagas = [int(archivo.readline().strip()) for _ in range(j)]
-        rafagas.insert(0,0)
         f = [int(archivo.readline().strip()) for _ in range(j)]
-        f.insert(0,0)
 
     orden_ataques, tropa_eliminadas=cargasOptimasDinamica(rafagas,j,f)
     print(f"Estrategia: {orden_ataques}.\nCantidad de tropas eliminadas: {tropa_eliminadas}.")
