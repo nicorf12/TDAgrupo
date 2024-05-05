@@ -50,9 +50,13 @@ def cargasOptimasDinamica(rafagas:list[int], j:int, f:list[int]):
     maxs = [0]*(j+1)
 
     for k in range(1,len(posibilidad)):
+        maximo_actual = 0
         for j in range(1,k+1):
             posibilidad[k][j] =  posibilidad[k-j][maxs[k-j]] + min(rafagas[k] , f[j])
-        maxs[k] = posibilidad[k].index(max(posibilidad[k]))
+            if posibilidad[k][j] > posibilidad[k][maximo_actual]:
+                maximo_actual = j
+        maxs[k] = maximo_actual
+        #maxs[k] = posibilidad[k].index(max(posibilidad[k]))
 
     valor_max = posibilidad[len(posibilidad)-1][maxs[len(posibilidad)-1]]
     return reconstruir_solucion(posibilidad, maxs, j), valor_max
