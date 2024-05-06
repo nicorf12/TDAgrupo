@@ -10,7 +10,7 @@ def generar_datos_aleatorios(n, f_cste,soldados_cste):
         f.append(nueva_f)
 
     if soldados_cste: rafagas = [random.randint(10,200)]*(n)
-    else: rafagas = [random.randint(0,f[-1]) for _ in range(n)]
+    else: rafagas = [random.randint(0,2*f[-1]) for _ in range(n)]
 
     
     return rafagas, n, f
@@ -41,16 +41,16 @@ def reconstruir_solucion(posibilidad, maxs, j):
             solucion.append("ATACAR")
         else:
             solucion.append("CARGAR")
-    return solucion
+    #return solucion
+    return ", ".join(solucion)
 
-def cargasOptimasDinamica(rafagas:list[int], j:int, f:list[int]):
+def cargasOptimasDinamica(rafagas:list[int], n:int, f:list[int]):
     rafagas.insert(0,0)
     f.insert(0,0)
     posibilidad = []
-    for _ in range(j+1):
-        posibilidad.append([0]*(j+1))
-    maxs = [0]*(j+1)
-
+    for _ in range(n+1):
+        posibilidad.append([0]*(n+1))
+    maxs = [0]*(n+1)
     for k in range(1,len(posibilidad)):
         maximo_actual = 0
         for j in range(1,k+1):
@@ -58,10 +58,8 @@ def cargasOptimasDinamica(rafagas:list[int], j:int, f:list[int]):
             if posibilidad[k][j] > posibilidad[k][maximo_actual]:
                 maximo_actual = j
         maxs[k] = maximo_actual
-        #maxs[k] = posibilidad[k].index(max(posibilidad[k]))
-
     valor_max = posibilidad[len(posibilidad)-1][maxs[len(posibilidad)-1]]
-    return reconstruir_solucion(posibilidad, maxs, j), valor_max
+    return reconstruir_solucion(posibilidad, maxs, n), valor_max
 
 
 def main(archivo):
