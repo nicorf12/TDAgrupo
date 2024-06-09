@@ -4,7 +4,8 @@ def main(archivo):
     habilidades = []
     with open(archivo, "r") as archivo:
         grupos = int(archivo.readline().strip())
-        maestro, habilidad = map(int, archivo.readline().strip().split(','))
+        nombre, valor = map(str, archivo.readline().strip().split(','))
+        maestro, habilidad = nombre,int(valor)
         maestros.append(maestro)
         habilidades.append(habilidad)
     #backtracking:
