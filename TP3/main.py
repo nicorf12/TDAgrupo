@@ -1,4 +1,5 @@
 import sys
+import time
 
 import solucion_backtracking
 def main(archivo, resolucion):
@@ -20,11 +21,15 @@ def main(archivo, resolucion):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
-        print("Uso: python algoritmo.py <archivo> <backtracking/programacion_lineal>")
-    else:
-        if sys.argv[2] != 'backtracking' and sys.argv[2] != 'programacion_lineal':
-            print("Ingrese una opcion valida de resolucion")
-        else:
-            filename = sys.argv[1]
-            resolucion = sys.argv[2]
+    inicio = time.time()
+    main("archivos/14_3.txt", "backtracking")
+    fin = time.time()
+    print((fin - inicio), " segundos")
+    #if len(sys.argv) != 3:
+    #    print("Uso: python algoritmo.py <archivo> <backtracking/programacion_lineal>")
+    #else:
+    #    if sys.argv[2] != 'backtracking' and sys.argv[2] != 'programacion_lineal':
+    #        print("Ingrese una opcion valida de resolucion")
+    #    else:
+    #        filename = sys.argv[1]
+    #        resolucion = sys.argv[2]
