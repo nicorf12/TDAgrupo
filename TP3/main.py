@@ -1,22 +1,30 @@
+import sys
+
 import solucion_backtracking
-def main(archivo):
-    maestros = []
-    habilidades = []
+def main(archivo, resolucion):
+    maestros_agua = {}
     with open(archivo, "r") as archivo:
         grupos = int(archivo.readline().strip())
-        nombre, valor = map(str, archivo.readline().strip().split(','))
-        maestro, habilidad = nombre,int(valor)
-        maestros.append(maestro)
-        habilidades.append(habilidad)
-    #backtracking:
-    coef, mejor_asignacion = solucion_backtracking.backtrack(maestros, [[] for _ in range(grupos)], [0]*grupos, 0)
+        for linea in archivo:
+            nombre, valor = map(str, linea.strip().split(','))
+            maestro, habilidad = nombre,int(valor)
+            maestros_agua[maestro] = habilidad
 
-    for i, grupo in enumerate(mejor_asignacion, 1):
-        print(f"Grupo {i}: {', '.join(grupo)}")
-    print("Coeficiente:", coef)
-
+    if resolucion == 'backtracking':
+        coef, mejor_asignacion = solucion_backtracking.backtrack(maestros_agua, [[] for _ in range(grupos)], [0]*grupos, 0, grupos)
+        for i, grupo in enumerate(mejor_asignacion, 1):
+            print(f"Grupo {i}: {', '.join(grupo)}")
+        print("Coeficiente:", coef)
+    #elif resolucion == 'programacion_lineal':
     #PL:
 
 
 if __name__ == "__main__":
-    main("archivos/6_3.txt")
+    if len(sys.argv) != 3:
+        print("Uso: python algoritmo.py <archivo> <backtracking/programacion_lineal>")
+    else:
+        if sys.argv[2] != 'backtracking' and sys.argv[2] != 'programacion_lineal':
+            print("Ingrese una opcion valida de resolucion")
+        else:
+            filename = sys.argv[1]
+            resolucion = sys.argv[2]
