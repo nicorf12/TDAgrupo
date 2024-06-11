@@ -22,9 +22,19 @@ def main(archivo, resolucion):
 
 if __name__ == "__main__":
     inicio = time.time()
-    main("archivos/14_3.txt", "backtracking")
+    main("archivos/15_4.txt", "backtracking")
     fin = time.time()
-    print((fin - inicio), " segundos")
+    total = fin - inicio
+    tiempo = ''
+    if total > 60 and total < 3600:
+        tiempo = 'minutos'
+        total = total / 60
+    elif total > 3600:
+        tiempo = 'horas'
+        total = total / 3600
+    else:
+        tiempo = 'segundos'
+    print(total, " ", tiempo)
     #if len(sys.argv) != 3:
     #    print("Uso: python algoritmo.py <archivo> <backtracking/programacion_lineal>")
     #else:
