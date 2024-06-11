@@ -13,10 +13,11 @@ def _backtrack(maestros_agua, maestros, grupos, fuerzas, fuerza_actual, mejor_co
     maestro = maestros.pop()
     for i in range(k):
         grupos[i].append(maestro)
-        fuerzas[i] += maestros_agua[maestro]
-        mejor_coef, mejor_asignacion = _backtrack(maestros_agua, maestros, grupos, fuerzas, fuerza_actual + maestros_agua[maestro], mejor_coef, mejor_asignacion, k)
-        grupos[i].pop()
-        fuerzas[i] -= maestros_agua[maestro]
+        if mejor_coef is None or fuerzas[i] + maestros_agua[maestro] < mejor_coef:
+            fuerzas[i] += maestros_agua[maestro]
+            mejor_coef, mejor_asignacion = _backtrack(maestros_agua, maestros, grupos, fuerzas, fuerza_actual + maestros_agua[maestro], mejor_coef, mejor_asignacion, k)
+            grupos[i].pop()
+            fuerzas[i] -= maestros_agua[maestro]
     maestros.append(maestro)
 
     return mejor_coef, mejor_asignacion
