@@ -18,14 +18,15 @@ def _backtrack(maestros_agua, maestros, grupos, fuerzas, fuerza_actual, mejor_co
 
     maestro = maestros.pop()
     for i in range(k):
-        if len(maestros) < grupos_vacios(grupos):
-            mejor_coef, mejor_asignacion = _backtrack(maestros_agua, maestros, grupos, fuerzas, fuerza_actual + maestros_agua[maestro], mejor_coef, mejor_asignacion, k)
-        else:
-            grupos[i].append(maestro)
-            fuerzas[i] += maestros_agua[maestro]
-            mejor_coef, mejor_asignacion = _backtrack(maestros_agua, maestros, grupos, fuerzas, fuerza_actual + maestros_agua[maestro], mejor_coef, mejor_asignacion, k)
-            grupos[i].pop()
-            fuerzas[i] -= maestros_agua[maestro]
+        #if len(maestros) < grupos_vacios(grupos):
+        #    print("estoy aca")
+        #    mejor_coef, mejor_asignacion = _backtrack(maestros_agua, maestros, grupos, fuerzas, fuerza_actual, mejor_coef, mejor_asignacion, k)
+        #else:
+        grupos[i].append(maestro)
+        fuerzas[i] += maestros_agua[maestro]
+        mejor_coef, mejor_asignacion = _backtrack(maestros_agua, maestros, grupos, fuerzas, fuerza_actual + maestros_agua[maestro], mejor_coef, mejor_asignacion, k)
+        grupos[i].pop()
+        fuerzas[i] -= maestros_agua[maestro]
     maestros.append(maestro)
 
     return mejor_coef, mejor_asignacion
