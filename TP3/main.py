@@ -1,7 +1,7 @@
 import sys
 import time
-
 import solucion_backtracking
+import solucion_pl
 def main(archivo, resolucion):
     maestros_agua = {}
     with open(archivo, "r") as archivo:
@@ -11,18 +11,20 @@ def main(archivo, resolucion):
             maestro, habilidad = nombre,int(valor)
             maestros_agua[maestro] = habilidad
 
-    if resolucion == 'backtracking':
+    if resolucion == 'b':
         coef, mejor_asignacion = solucion_backtracking.backtrack(maestros_agua, [[] for _ in range(grupos)], [0]*grupos, 0, grupos)
         for i, grupo in enumerate(mejor_asignacion, 1):
             print(f"Grupo {i}: {', '.join(grupo)}")
         print("Coeficiente:", coef)
-    #elif resolucion == 'programacion_lineal':
-    #PL:
-
+    elif resolucion == 'pl':
+        coef, mejor_asignacion = solucion_pl.balancear_grupos_mininima_desviacion(maestros_agua,grupos)
+        for i, grupo in enumerate(mejor_asignacion, 1):
+            print(f"Grupo {i}: {', '.join(grupo)}")
+        print("Coeficiente:", coef)
 
 if __name__ == "__main__":
     inicio = time.time()
-    main("archivos/14_3.txt", "backtracking")
+    main("sets/set_3.txt", "pl")
     fin = time.time()
     print((fin - inicio), " segundos")
     #if len(sys.argv) != 3:
