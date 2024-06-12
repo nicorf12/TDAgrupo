@@ -46,7 +46,7 @@ if __name__ == "__main__":
     if len(sys.argv) != 3:
         print("Uso: python algoritmo.py <archivo> <backtracking/programacion_lineal>")
     else:
-        if sys.argv[2] != 'backtracking' and sys.argv[2] != 'programacion_lineal':
+        if sys.argv[2] != 'b' and sys.argv[2] != 'pl':
             print("Ingrese una opcion valida de resolucion")
         else:
             filename = sys.argv[1]

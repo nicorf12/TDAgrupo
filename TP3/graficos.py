@@ -27,14 +27,14 @@ def asignar_valores(k):
     return maestros,k
 
 def generar_archivo(nombre_archivo):
-    maestros, k = asignar_valores()
+    maestros, k = asignar_valores(random.randint(1, 5))
     with open(nombre_archivo, 'w') as file:
         file.write(f"{k}\n")
         for nombre in maestros:
             file.write(f"{nombre}, {maestros[nombre]}\n")
 
 def crear_sets():
-    for i in range(5):
+    for i in range(5,10):
         generar_archivo(f"sets/set_{i}.txt")
 
 def generar_grafico_complejidad_teorica(solucion):
@@ -43,7 +43,7 @@ def generar_grafico_complejidad_teorica(solucion):
     tiempos = []
     if solucion == "pl":  
         for r in rango:
-            tiempos.append(timeit.timeit(lambda: pl.balancear_grupos_minima_diferencia(*asignar_valores(r)), globals=globals(), number=2))
+            tiempos.append(timeit.timeit(lambda: pl.balancear_grupos_minima_diferencia(*asignar_valores(r)), globals=globals(), number=1))
     elif solucion == "bk":
         for r in rango:
             tiempos.append(timeit.timeit(lambda: bt.backtrack(*asignar_valores(r)), globals=globals(), number=1))
@@ -94,24 +94,31 @@ def vs_pl():
 
     cadena = ""
     for archivo in archivos:
+        maestros_agua = {}
+        with open(archivo, "r") as archivo:
+            grupos = int(archivo.readline().strip())
+            for linea in archivo:
+                nombre, valor = map(str, linea.strip().split(','))
+                maestro, habilidad = nombre,int(valor)
+                maestros_agua[maestro] = habilidad
         inicio = time.time()
-        coef, mejor_asignacion = pl.balancear_grupos_mininima_desviacion(archivo)
+        coef, mejor_asignacion = pl.balancear_grupos_mininima_desviacion(maestros_agua,grupos)
         fin = time.time()
-        cadena+= f"-> {archivo} por minima desviacion\n"
+        cadena+= f"-> {archivo.name} por minima desviacion\n"
         for i, grupo in enumerate(mejor_asignacion, 1):
             cadena+=f"Grupo {i}: {', '.join(grupo)}\n"
-        cadena += f"Coeficiente:, {coef}\n {archivo} - tardo {fin - inicio}, segundos.\n\n"
+        cadena += f"Coeficiente:, {coef}\n {archivo.name} - tardo {fin - inicio}, segundos.\n\n"
 
         inicio = time.time()
-        coef, mejor_asignacion = pl.balancear_grupos_minima_diferencia(archivo)
+        coef, mejor_asignacion = pl.balancear_grupos_minima_diferencia(maestros_agua,grupos)
         fin = time.time()
 
-        cadena+= f"-> {archivo} por minima diferencia\n"
+        cadena+= f"-> {archivo.name} por minima diferencia\n"
         for i, grupo in enumerate(mejor_asignacion, 1):
             cadena+=f"Grupo {i}: {', '.join(grupo)}\n"
-        cadena += f"Coeficiente:, {coef}\n {archivo} - tardo {fin - inicio}, segundos.\n\n"
+        cadena += f"Coeficiente:, {coef}\n {archivo.name} - tardo {fin - inicio}, segundos.\n\n"
     
-    with open("sets/VS_PL", 'w') as archivo:
+    with open("sets/VS_PL.txt", 'w') as archivo:
         archivo.write(cadena)
 
-generar_grafico_complejidad_teorica("pl")
+crear_sets()
