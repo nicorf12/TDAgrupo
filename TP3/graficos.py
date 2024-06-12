@@ -10,6 +10,7 @@ import solucion_aproximacion as aprox
 import solucion_backtracking as bt
 import os
 import glob
+from scipy.optimize import curve_fit
 
 def generar_nombre_aleatorio():
     return ''.join(random.choices(string.ascii_letters, k=5))
@@ -38,63 +39,31 @@ def crear_sets():
     for i in range(5,10):
         generar_archivo(f"sets/set_{i}.txt")
 
-""""
-def generar_grafico_complejidad_teorica(solucion):
-    rango = range(10)
+
+def generar_grafico_complejidad_teorica(solucion,tiempos,rango):
+
 
     print("COMPLEJIDAD TEORICA")
 
     name=""
-    tiempos = []
     if solucion == "pl":  
         for r in rango:
             print(f"P.L {r}")
             name = "complejidad_pl.png"
-            tiempos.append(timeit.timeit(lambda: pl.balancear_grupos_minima_diferencia(*asignar_valores(r)), globals=globals(), number=1))
     elif solucion == "bt":
         for r in rango:
             print(f"Backtraking {r}")
             name = "complejidad_bt.png"
-            maestros, _ = asignar_valores(r)
-            tiempos.append(timeit.timeit(lambda: bt.backtrack(maestros, [[] for _ in range(r)], [0]*r, 0,r), globals=globals(), number=1))
 
     x = np.array(rango)
     y = np.array(tiempos)
 
-    a, b = ajustar_modelo_exponencial(x, y)
+    print(tiempos)
+
+    popt, _ = ajustar_modelo_exponencial(x, y)
 
     plt.plot(x, y, 'r', label='Datos originales', markersize=8, color='blue')
-    plt.plot(x, a * np.exp(b * x), label='Ajuste exponencial', color='green', linestyle='--', linewidth=2)
-    plt.title('Ajuste de Complejidad Teórica (2^n) vs Tiempos de Ejecución')
-    plt.xlabel('Tamaño de entrada (n)')
-    plt.ylabel('Tiempo de ejecución (segundos)')
-    plt.legend(loc='best')
-    plt.grid(True, which='both', linestyle='--', linewidth=0.7)
-    plt.ylim([0, max(y) * 1.1])
-    plt.xlim([0, max(x) * 1.1])
-    plt.savefig(name)
-    plt.close()
-"""
-
-def generar_grafico_complejidad_teorica_pl():
-    rango = range(8)
-
-    print("COMPLEJIDAD TEORICA")
-
-    name = "complejidad_pl.png"
-
-    tiempos = []
-    for r in rango:
-        print(f"P.L {r}")
-        tiempos.append(timeit.timeit(lambda: pl.balancear_grupos_minima_diferencia(*asignar_valores(r)), globals=globals(), number=1))
-
-    x = np.array(rango)
-    y = np.array(tiempos)
-
-    a, b = ajustar_modelo_exponencial(x, y)
-
-    plt.plot(x, y, 'r', label='Datos originales', markersize=8, color='blue')
-    plt.plot(x, a * np.exp(b * x), label='Ajuste exponencial', color='green', linestyle='--', linewidth=2)
+    plt.plot(x, modelo_exponencial(x, *popt), label='Ajuste exponencial', color='green', linestyle='--', linewidth=2)
     plt.title('Ajuste de Complejidad Teórica (2^n) vs Tiempos de Ejecución')
     plt.xlabel('Tamaño de entrada (n)')
     plt.ylabel('Tiempo de ejecución (segundos)')
@@ -105,57 +74,30 @@ def generar_grafico_complejidad_teorica_pl():
     plt.savefig(name)
     plt.close()
 
-def generar_grafico_complejidad_teorica_bt():
-    rango = range(8)
-
-    print("COMPLEJIDAD TEORICA")
-
-    name = "complejidad_bt.png"
-    tiempos = []
-
-    for r in rango:
-        print(f"Backtraking {r}")
-        maestros, _ = asignar_valores(r)
-        tiempos.append(timeit.timeit(lambda: bt.backtrack(maestros, [[] for _ in range(r)], [0]*r, 0,r), globals=globals(), number=1))
-
-    x = np.array(rango)
-    y = np.array(tiempos)
-
-    a, b = ajustar_modelo_exponencial(x, y)
-
-    plt.plot(x, y, 'r', label='Datos originales', markersize=8, color='blue')
-    plt.plot(x, a * np.exp(b * x), label='Ajuste exponencial', color='green', linestyle='--', linewidth=2)
-    plt.title('Ajuste de Complejidad Teórica (2^n) vs Tiempos de Ejecución')
-    plt.xlabel('Tamaño de entrada (n)')
-    plt.ylabel('Tiempo de ejecución (segundos)')
-    plt.legend(loc='best')
-    plt.grid(True, which='both', linestyle='--', linewidth=0.7)
-    plt.ylim([0, max(y) * 1.1])
-    plt.xlim([0, max(x) * 1.1])
-    plt.savefig(name)
-    plt.close()
+def modelo_exponencial(x, a, b):
+    return a * np.exp(b * x)
 
 def ajustar_modelo_exponencial(x, y):
-    y_log = np.log(y)
-    A = np.vstack([x, np.ones(len(x))]).T
-    m, c = np.linalg.lstsq(A, y_log, rcond=None)[0]
-    return np.exp(c), m
+    popt, pcov = curve_fit(modelo_exponencial, x, y, p0=(1, 0.1))
+    return popt, pcov
+
+
 
 def generar_grafico_PL_BT():
-    rango = range(8)
+    rango = range(7)
     
     print("P.L vs BT")
 
     tiempos_pl = []
     for r in rango:
         print(f"P.L {r}")
-        tiempos_pl.append(timeit.timeit(lambda: pl.balancear_grupos_minima_diferencia(*asignar_valores(r)), globals=globals(), number=1))
+        tiempos_pl.append(timeit.timeit(lambda: pl.balancear_grupos_minima_diferencia(*asignar_valores(r)), globals=globals(), number=3))
 
     tiempos_bt = []
     for r in rango:
         print(f"Backtraking {r}")
         maestros, _ = asignar_valores(r)
-        tiempos_bt.append(timeit.timeit(lambda: bt.backtrack(maestros, [[] for _ in range(r)], [0]*r, 0,r), globals=globals(), number=1))
+        tiempos_bt.append(timeit.timeit(lambda: bt.backtrack(maestros, [[] for _ in range(r)], [0]*r, 0,r), globals=globals(), number=3))
 
     plt.plot(rango, tiempos_pl, 'r', label='Programacion Lineal',color='blue')
     plt.plot(rango, tiempos_bt, 'r', label='Backtraking',color='green')
@@ -164,12 +106,16 @@ def generar_grafico_PL_BT():
     plt.legend()
     plt.savefig('grafico_PL_BT.png')
     plt.close()
+    generar_grafico_complejidad_teorica("pl",tiempos_pl,rango)
+    generar_grafico_complejidad_teorica("bt", tiempos_bt,rango)
+    
+
 
 def comparaciones():
     carpeta = './sets'
     archivos = glob.glob(os.path.join(carpeta, '*'))
 
-    cota = 0
+    cota = []
     cadena = ""
     for archivo in archivos:
         maestros_agua = {}
@@ -197,17 +143,18 @@ def comparaciones():
         cadena += f"Coeficiente:, {coef}\n {archivo.name} - tardo {fin - inicio}, segundos.\n\n"
 
         inicio = time.time()
-        coef, _ = aprox.aproximacion_tribu_agua(maestros_agua,grupos)
+        coef_aprox = aprox.aproximacion_tribu_agua(grupos,maestros_agua)
         fin = time.time()
         cadena+= f"-> {archivo.name} por aproximacion lineal\n"
         cadena += f"Coeficiente:, {coef}\n {archivo.name} - tardo {fin - inicio}, segundos.\n\n"
 
+        cota.append(coef_aprox/coef)
+
     
     with open("sets/Comparaciones.txt", 'w') as archivo:
         archivo.write(cadena)
-        archivo.write(f"Cota Empirica: {cota}")
+        archivo.write(f"Cota Empirica: {cota} con promedio {sum(cota)/len(archivos)} y maximo {max(cota)}.")
+
 
 
 generar_grafico_PL_BT()
-generar_grafico_complejidad_teorica_bt()
-generar_grafico_complejidad_teorica_pl()

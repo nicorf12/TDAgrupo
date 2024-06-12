@@ -4,6 +4,7 @@ def grupos_vacios(grupos):
     for grupo in grupos:
         if len(grupo) == 0: vacios += 1
     return vacios
+
 def puede_agregar_en_el_grupo(grupos, grupo_actual):
     if len(grupos[grupo_actual]) == 0: return True
     if grupos_vacios(grupos) == 0: return True

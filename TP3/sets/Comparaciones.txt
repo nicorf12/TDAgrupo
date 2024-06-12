@@ -1,0 +1,187 @@
+-> ./sets\set_0.txt por minima diferencia
+Grupo 1: CBJhb
+Grupo 2: xrqRW, MFEzZ
+Grupo 3: oNwVr, orWJz
+Coeficiente:, 3193766
+ ./sets\set_0.txt - tardo 0.10571742057800293, segundos.
+
+-> ./sets\set_0.txt por minima desviacion
+Grupo 1: CBJhb
+Grupo 2: xrqRW, MFEzZ
+Grupo 3: oNwVr, orWJz
+Coeficiente:, 3193766
+ ./sets\set_0.txt - tardo 0.08951258659362793, segundos.
+
+-> ./sets\set_0.txt por aproximacion lineal
+Coeficiente:, 3193766
+ ./sets\set_0.txt - tardo 0.0, segundos.
+
+-> ./sets\set_1.txt por minima diferencia
+Grupo 1: jUkvg
+Grupo 2: WRVsy
+Grupo 3: LuSUG
+Coeficiente:, 635670
+ ./sets\set_1.txt - tardo 0.06280350685119629, segundos.
+
+-> ./sets\set_1.txt por minima desviacion
+Grupo 1: LuSUG
+Grupo 2: WRVsy
+Grupo 3: jUkvg
+Coeficiente:, 635670
+ ./sets\set_1.txt - tardo 0.06881475448608398, segundos.
+
+-> ./sets\set_1.txt por aproximacion lineal
+Coeficiente:, 635670
+ ./sets\set_1.txt - tardo 0.0, segundos.
+
+-> ./sets\set_2.txt por minima diferencia
+Grupo 1: TuUuZ
+Grupo 2: OLXYQ, aSHXq
+Grupo 3: OHfKm, ZZWts
+Coeficiente:, 1479046
+ ./sets\set_2.txt - tardo 0.05005693435668945, segundos.
+
+-> ./sets\set_2.txt por minima desviacion
+Grupo 1: OLXYQ, aSHXq
+Grupo 2: OHfKm, ZZWts
+Grupo 3: TuUuZ
+Coeficiente:, 1479046
+ ./sets\set_2.txt - tardo 0.08876371383666992, segundos.
+
+-> ./sets\set_2.txt por aproximacion lineal
+Coeficiente:, 1479046
+ ./sets\set_2.txt - tardo 0.0, segundos.
+
+-> ./sets\set_3.txt por minima diferencia
+Grupo 1: cgKwV, VrUVO
+Grupo 2: uBYyh, BmtOz, rMGhg
+Grupo 3: njLOI, PraLo, xQieW
+Grupo 4: MsWPI, ottwL, uSXzz, apmii
+Grupo 5: PtAtS, Wcxvi, FILLj
+Coeficiente:, 11588962
+ ./sets\set_3.txt - tardo 408.1843900680542, segundos.
+
+-> ./sets\set_3.txt por minima desviacion
+Grupo 1: cgKwV, VrUVO
+Grupo 2: PtAtS, Wcxvi, FILLj
+Grupo 3: njLOI, PraLo, xQieW
+Grupo 4: uBYyh, rMGhg, apmii
+Grupo 5: BmtOz, MsWPI, ottwL, uSXzz
+Coeficiente:, 11588892
+ ./sets\set_3.txt - tardo 645.2048697471619, segundos.
+
+-> ./sets\set_3.txt por aproximacion lineal
+Coeficiente:, 11588892
+ ./sets\set_3.txt - tardo 0.0, segundos.
+
+-> ./sets\set_4.txt por minima diferencia
+Grupo 1: AqKYF
+Grupo 2: KMkig
+Grupo 3: xdHbv
+Grupo 4: SSuZr
+Coeficiente:, 1708954
+ ./sets\set_4.txt - tardo 0.10768246650695801, segundos.
+
+-> ./sets\set_4.txt por minima desviacion
+Grupo 1: xdHbv
+Grupo 2: SSuZr
+Grupo 3: KMkig
+Grupo 4: AqKYF
+Coeficiente:, 1708954
+ ./sets\set_4.txt - tardo 0.09368348121643066, segundos.
+
+-> ./sets\set_4.txt por aproximacion lineal
+Coeficiente:, 1708954
+ ./sets\set_4.txt - tardo 0.0, segundos.
+
+-> ./sets\set_5.txt por minima diferencia
+Grupo 1: KMrAU
+Grupo 2: GJeLG, gppWU, PkMGy, wCvNT
+Grupo 3: AUDqs
+Grupo 4: udQvU, aBWDJ
+Coeficiente:, 3260953
+ ./sets\set_5.txt - tardo 0.18048596382141113, segundos.
+
+-> ./sets\set_5.txt por minima desviacion
+Grupo 1: udQvU, aBWDJ
+Grupo 2: GJeLG, PkMGy, wCvNT
+Grupo 3: KMrAU
+Grupo 4: gppWU, AUDqs
+Coeficiente:, 3261007
+ ./sets\set_5.txt - tardo 0.1875004768371582, segundos.
+
+-> ./sets\set_5.txt por aproximacion lineal
+Coeficiente:, 3261007
+ ./sets\set_5.txt - tardo 0.0, segundos.
+
+-> ./sets\set_6.txt por minima diferencia
+Grupo 1: gIVHI
+Grupo 2: rVKFd
+Grupo 3: SJWRR, MOsmj
+Grupo 4: yQggB
+Coeficiente:, 2085205
+ ./sets\set_6.txt - tardo 0.12578177452087402, segundos.
+
+-> ./sets\set_6.txt por minima desviacion
+Grupo 1: gIVHI
+Grupo 2: SJWRR, MOsmj
+Grupo 3: rVKFd
+Grupo 4: yQggB
+Coeficiente:, 2085205
+ ./sets\set_6.txt - tardo 0.11070489883422852, segundos.
+
+-> ./sets\set_6.txt por aproximacion lineal
+Coeficiente:, 2085205
+ ./sets\set_6.txt - tardo 0.0, segundos.
+
+-> ./sets\set_7.txt por minima diferencia
+Grupo 1: pWeaw, eNaOi, yIxAm
+Grupo 2: kkkPi
+Grupo 3: NdtGf
+Grupo 4: wvLRg
+Grupo 5: iHLvA
+Coeficiente:, 1837193
+ ./sets\set_7.txt - tardo 0.2424929141998291, segundos.
+
+-> ./sets\set_7.txt por minima desviacion
+Grupo 1: NdtGf
+Grupo 2: wvLRg
+Grupo 3: kkkPi
+Grupo 4: pWeaw, eNaOi, yIxAm
+Grupo 5: iHLvA
+Coeficiente:, 1837193
+ ./sets\set_7.txt - tardo 0.2523036003112793, segundos.
+
+-> ./sets\set_7.txt por aproximacion lineal
+Coeficiente:, 1837193
+ ./sets\set_7.txt - tardo 0.0, segundos.
+
+-> ./sets\set_8.txt por minima diferencia
+Grupo 1: GnCqR
+Coeficiente:, 69169
+ ./sets\set_8.txt - tardo 0.020922422409057617, segundos.
+
+-> ./sets\set_8.txt por minima desviacion
+Grupo 1: GnCqR
+Coeficiente:, 69169
+ ./sets\set_8.txt - tardo 0.01994609832763672, segundos.
+
+-> ./sets\set_8.txt por aproximacion lineal
+Coeficiente:, 69169
+ ./sets\set_8.txt - tardo 0.0, segundos.
+
+-> ./sets\set_9.txt por minima diferencia
+Grupo 1: DuKmA, dCcyV
+Coeficiente:, 3470769
+ ./sets\set_9.txt - tardo 0.02059006690979004, segundos.
+
+-> ./sets\set_9.txt por minima desviacion
+Grupo 1: DuKmA, dCcyV
+Coeficiente:, 3470769
+ ./sets\set_9.txt - tardo 0.01994633674621582, segundos.
+
+-> ./sets\set_9.txt por aproximacion lineal
+Coeficiente:, 3470769
+ ./sets\set_9.txt - tardo 0.0, segundos.
+
+Cota Empirica: [1.0, 1.0, 1.0, 1.0028227029814412, 1.0, 0.9999834406979193, 1.0, 1.0, 1.0, 1.0] con promedio 1.0002806143679361 y maximo 1.0028227029814412.
