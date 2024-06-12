@@ -22,16 +22,35 @@ def main(archivo, resolucion):
             print(f"Grupo {i}: {', '.join(grupo)}")
         print("Coeficiente:", coef)
 
+
+def mostrar_tiempo(inicio, fin):
+    total = fin - inicio
+    segundos = 0
+    minutos = 0
+    horas = 0
+    if total > 60 and total < 3600:
+        minutos = total // 60
+        segundos = total % 60
+        segundos //= 1
+    elif total > 3600:
+        minutos = total % 60;
+        horas = total // 3600
+    else:
+        if total < 1: segundos = total
+        else: segundos = total // 1
+    print(horas, " horas, ", minutos, " minutos, ", segundos, "segundos")
+    return
+
 if __name__ == "__main__":
     inicio = time.time()
-    main("sets/set_3.txt", "pl")
+    if len(sys.argv) != 3:
+        print("Uso: python algoritmo.py <archivo> <backtracking/programacion_lineal>")
+    else:
+        if sys.argv[2] != 'backtracking' and sys.argv[2] != 'programacion_lineal':
+            print("Ingrese una opcion valida de resolucion")
+        else:
+            filename = sys.argv[1]
+            resolucion = sys.argv[2]
+            main(filename, resolucion)
     fin = time.time()
-    print((fin - inicio), " segundos")
-    #if len(sys.argv) != 3:
-    #    print("Uso: python algoritmo.py <archivo> <backtracking/programacion_lineal>")
-    #else:
-    #    if sys.argv[2] != 'backtracking' and sys.argv[2] != 'programacion_lineal':
-    #        print("Ingrese una opcion valida de resolucion")
-    #    else:
-    #        filename = sys.argv[1]
-    #        resolucion = sys.argv[2]
+    mostrar_tiempo(inicio, fin)
