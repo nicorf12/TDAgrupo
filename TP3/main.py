@@ -22,7 +22,6 @@ def main(archivo, resolucion):
             print(f"Grupo {i}: {', '.join(grupo)}")
         print("Coeficiente:", coef)
 
-
 def mostrar_tiempo(inicio, fin):
     total = fin - inicio
     segundos = 0
@@ -38,13 +37,16 @@ def mostrar_tiempo(inicio, fin):
     else:
         if total < 1: segundos = total
         else: segundos = total // 1
-    print(horas, " horas, ", minutos, " minutos, ", segundos, "segundos")
+
+    if horas >= 1: print(horas, " horas")
+    if minutos >= 1: print(minutos, " minutos")
+    print(segundos, " segundos")
     return
 
 if __name__ == "__main__":
     inicio = time.time()
     if len(sys.argv) != 3:
-        print("Uso: python algoritmo.py <archivo> <backtracking/programacion_lineal>")
+        print("Uso: python algoritmo.py <archivo> <b/pl>")
     else:
         if sys.argv[2] != 'b' and sys.argv[2] != 'pl':
             print("Ingrese una opcion valida de resolucion")
