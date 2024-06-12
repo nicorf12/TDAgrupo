@@ -1,4 +1,15 @@
 import solucion_aproximacion as aprox
+def grupos_vacios(grupos):
+    vacios = 0
+    for grupo in grupos:
+        if len(grupo) == 0: vacios += 1
+    return vacios
+def puede_agregar_en_el_grupo(grupos, grupo_actual):
+    if len(grupos[grupo_actual]) == 0: return True
+    if grupos_vacios(grupos) == 0: return True
+    if grupo_actual < len(grupos)-1:
+        if len(grupos[grupo_actual]) != 0 and len(grupos[grupo_actual + 1]) == 0: return False
+    return True
 
 def _backtrack(maestros_agua, maestros, grupos, fuerzas, fuerza_actual, mejor_coef, mejor_asignacion, k):
     if len(fuerzas) > 0:
@@ -15,11 +26,13 @@ def _backtrack(maestros_agua, maestros, grupos, fuerzas, fuerza_actual, mejor_co
 
     maestro = maestros.pop()
     for i in range(k):
-        grupos[i].append(maestro)
-        fuerzas[i] += maestros_agua[maestro]
-        mejor_coef, mejor_asignacion = _backtrack(maestros_agua, maestros, grupos, fuerzas, fuerza_actual + maestros_agua[maestro], mejor_coef, mejor_asignacion, k)
-        grupos[i].pop()
-        fuerzas[i] -= maestros_agua[maestro]
+        #si ya se que no puedo agregar, no tiene sentido intentarlo
+        if puede_agregar_en_el_grupo(grupos, i):
+            grupos[i].append(maestro)
+            fuerzas[i] += maestros_agua[maestro]
+            mejor_coef, mejor_asignacion = _backtrack(maestros_agua, maestros, grupos, fuerzas, fuerza_actual + maestros_agua[maestro], mejor_coef, mejor_asignacion, k)
+            grupos[i].pop()
+            fuerzas[i] -= maestros_agua[maestro]
     maestros.append(maestro)
 
     return mejor_coef, mejor_asignacion
