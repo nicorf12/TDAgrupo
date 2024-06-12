@@ -2,6 +2,8 @@ import sys
 import time
 import solucion_backtracking
 import solucion_pl
+import solucion_aproximacion as aprox
+
 def main(archivo, resolucion):
     maestros_agua = {}
     with open(archivo, "r") as archivo:
@@ -21,6 +23,9 @@ def main(archivo, resolucion):
         for i, grupo in enumerate(mejor_asignacion, 1):
             print(f"Grupo {i}: {', '.join(grupo)}")
         print("Coeficiente:", coef)
+    elif resolucion == "aprox":
+        coef = aprox.aproximacion_tribu_agua(grupos, maestros_agua)
+        print(coef)
 
 
 def mostrar_tiempo(inicio, fin):
@@ -46,7 +51,7 @@ if __name__ == "__main__":
     if len(sys.argv) != 3:
         print("Uso: python algoritmo.py <archivo> <backtracking/programacion_lineal>")
     else:
-        if sys.argv[2] != 'b' and sys.argv[2] != 'pl':
+        if sys.argv[2] != 'b' and sys.argv[2] != 'pl' and sys.argv[2] != 'aprox':
             print("Ingrese una opcion valida de resolucion")
         else:
             filename = sys.argv[1]
