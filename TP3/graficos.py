@@ -39,7 +39,6 @@ def crear_sets():
     for i in range(5,10):
         generar_archivo(f"sets/set_{i}.txt")
 
-
 def generar_grafico_complejidad_teorica(solucion,tiempos,rango):
 
 
@@ -81,8 +80,6 @@ def ajustar_modelo_exponencial(x, y):
     popt, pcov = curve_fit(modelo_exponencial, x, y, p0=(1, 0.1))
     return popt, pcov
 
-
-
 def generar_grafico_PL_BT():
     rango = range(7)
     
@@ -91,13 +88,13 @@ def generar_grafico_PL_BT():
     tiempos_pl = []
     for r in rango:
         print(f"P.L {r}")
-        tiempos_pl.append(timeit.timeit(lambda: pl.balancear_grupos_minima_diferencia(*asignar_valores(r)), globals=globals(), number=3))
+        tiempos_pl.append(timeit.timeit(lambda: pl.balancear_grupos_minima_diferencia(*asignar_valores(r)), globals=globals(), number=1))
 
     tiempos_bt = []
     for r in rango:
         print(f"Backtraking {r}")
         maestros, _ = asignar_valores(r)
-        tiempos_bt.append(timeit.timeit(lambda: bt.backtrack(maestros, [[] for _ in range(r)], [0]*r, 0,r), globals=globals(), number=3))
+        tiempos_bt.append(timeit.timeit(lambda: bt.backtrack(maestros, [[] for _ in range(r)], [0]*r, 0,r), globals=globals(), number=1))
 
     plt.plot(rango, tiempos_pl, 'r', label='Programacion Lineal',color='blue')
     plt.plot(rango, tiempos_bt, 'r', label='Backtraking',color='green')
@@ -109,15 +106,14 @@ def generar_grafico_PL_BT():
     generar_grafico_complejidad_teorica("pl",tiempos_pl,rango)
     generar_grafico_complejidad_teorica("bt", tiempos_bt,rango)
     
-
-
 def comparaciones():
-    carpeta = './sets'
-    archivos = glob.glob(os.path.join(carpeta, '*'))
+
+    archivos_nuestros = glob.glob(os.path.join('./sets', '*'))
 
     cota = []
     cadena = ""
-    for archivo in archivos:
+    for archivo in archivos_nuestros:
+        print(archivo)
         maestros_agua = {}
         with open(archivo, "r") as archivo:
             grupos = int(archivo.readline().strip())
@@ -132,7 +128,7 @@ def comparaciones():
         cadena+= f"-> {archivo.name} por minima diferencia\n"
         for i, grupo in enumerate(mejor_asignacion, 1):
             cadena+=f"Grupo {i}: {', '.join(grupo)}\n"
-        cadena += f"Coeficiente:, {coef}\n {archivo.name} - tardo {fin - inicio}, segundos.\n\n"
+        cadena += f"Coeficiente: {coef}\n {archivo.name} - tardo {fin - inicio} segundos.\n\n"
 
         inicio = time.time()
         coef, mejor_asignacion = pl.balancear_grupos_mininima_desviacion(maestros_agua,grupos)
@@ -140,21 +136,46 @@ def comparaciones():
         cadena+= f"-> {archivo.name} por minima desviacion\n"
         for i, grupo in enumerate(mejor_asignacion, 1):
             cadena+=f"Grupo {i}: {', '.join(grupo)}\n"
-        cadena += f"Coeficiente:, {coef}\n {archivo.name} - tardo {fin - inicio}, segundos.\n\n"
+        cadena += f"Coeficiente: {coef}\n {archivo.name} - tardo {fin - inicio} segundos.\n\n"
+        inicio = time.time()
+        coef, mejor_asignacion = bt.backtrack(maestros_agua, [[] for _ in range(grupos)], [0]*grupos, 0,grupos)
+        fin = time.time()
+        cadena+= f"-> {archivo.name} por backtraking\n"
+        for i, grupo in enumerate(mejor_asignacion, 1):
+            cadena+=f"Grupo {i}: {', '.join(grupo)}\n"
+        cadena += f"Coeficiente: {coef}\n {archivo.name} - tardo {fin - inicio} segundos.\n\n"        
+        
 
         inicio = time.time()
         coef_aprox = aprox.aproximacion_tribu_agua(grupos,maestros_agua)
         fin = time.time()
         cadena+= f"-> {archivo.name} por aproximacion lineal\n"
-        cadena += f"Coeficiente:, {coef}\n {archivo.name} - tardo {fin - inicio}, segundos.\n\n"
+        cadena += f"Coeficiente: {coef_aprox}\n {archivo.name} - tardo {fin - inicio} segundos.\n\n"
 
         cota.append(coef_aprox/coef)
 
-    
+    archivos_catedra = glob.glob(os.path.join('./sets_catedra', '*'))
+
+    cadena_catedra = ""
+    for archivo in archivos_catedra:
+        print(archivo)
+        maestros_agua = {}
+        with open(archivo, "r") as archivo:
+            grupos = int(archivo.readline().strip())
+            for linea in archivo:
+                nombre, valor = map(str, linea.strip().split(','))
+                maestro, habilidad = nombre,int(valor)
+                maestros_agua[maestro] = habilidad
+
+        inicio = time.time()
+        coef_aprox = aprox.aproximacion_tribu_agua(grupos,maestros_agua)
+        fin = time.time()
+        cadena_catedra+= f"-> {archivo.name} por aproximacion lineal\n"
+        cadena_catedra += f"Coeficiente: {coef_aprox}\n\n"
+
     with open("sets/Comparaciones.txt", 'w') as archivo:
         archivo.write(cadena)
-        archivo.write(f"Cota Empirica: {cota} con promedio {sum(cota)/len(archivos)} y maximo {max(cota)}.")
+        archivo.write(f"Cota Empirica: {cota} con promedio {sum(cota)/len(archivos_nuestros)} y maximo {max(cota)}.")
 
-
-
-generar_grafico_PL_BT()
+    with open("sets/valores_aproximacion_catedra.txt", 'w') as archivo:
+        archivo.write(cadena_catedra)

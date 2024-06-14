@@ -1,0 +1,63 @@
+-> ./sets_catedra\10_10.txt por aproximacion lineal
+Coeficiente: 172295
+
+-> ./sets_catedra\10_3.txt por aproximacion lineal
+Coeficiente: 385249
+
+-> ./sets_catedra\10_5.txt por aproximacion lineal
+Coeficiente: 355882
+
+-> ./sets_catedra\11_5.txt por aproximacion lineal
+Coeficiente: 2906564
+
+-> ./sets_catedra\14_3.txt por aproximacion lineal
+Coeficiente: 15664276
+
+-> ./sets_catedra\14_4.txt por aproximacion lineal
+Coeficiente: 15292085
+
+-> ./sets_catedra\14_6.txt por aproximacion lineal
+Coeficiente: 10700172
+
+-> ./sets_catedra\15_4.txt por aproximacion lineal
+Coeficiente: 4317075
+
+-> ./sets_catedra\15_6.txt por aproximacion lineal
+Coeficiente: 6377501
+
+-> ./sets_catedra\17_10.txt por aproximacion lineal
+Coeficiente: 5430512
+
+-> ./sets_catedra\17_5.txt por aproximacion lineal
+Coeficiente: 15975947
+
+-> ./sets_catedra\17_7.txt por aproximacion lineal
+Coeficiente: 11513230
+
+-> ./sets_catedra\18_6.txt por aproximacion lineal
+Coeficiente: 10325588
+
+-> ./sets_catedra\18_8.txt por aproximacion lineal
+Coeficiente: 12000279
+
+-> ./sets_catedra\20_4.txt por aproximacion lineal
+Coeficiente: 21083935
+
+-> ./sets_catedra\20_5.txt por aproximacion lineal
+Coeficiente: 16838539
+
+-> ./sets_catedra\20_8.txt por aproximacion lineal
+Coeficiente: 11423826
+
+-> ./sets_catedra\5_2.txt por aproximacion lineal
+Coeficiente: 1894340
+
+-> ./sets_catedra\6_3.txt por aproximacion lineal
+Coeficiente: 1640690
+
+-> ./sets_catedra\6_4.txt por aproximacion lineal
+Coeficiente: 807418
+
+-> ./sets_catedra\8_3.txt por aproximacion lineal
+Coeficiente: 4298131
+
