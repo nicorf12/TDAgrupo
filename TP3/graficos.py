@@ -26,24 +26,20 @@ def generar_maestros_aleatorios(cantidad):
 def asignar_valores(k):
     cantidad_maestros = random.randint(k, 2 * k)
     maestros = generar_maestros_aleatorios(cantidad_maestros)
-    return maestros,k
+    return maestros
 
 def generar_archivo(nombre_archivo):
-    maestros, k = asignar_valores(random.randint(1, 5))
+    maestros = asignar_valores(random.randint(20, 35))
     with open(nombre_archivo, 'w') as file:
-        file.write(f"{k}\n")
+        file.write(f"{random.randint(5, 10)}\n")
         for nombre in maestros:
             file.write(f"{nombre}, {maestros[nombre]}\n")
 
 def crear_sets():
-    for i in range(5,10):
-        generar_archivo(f"sets/set_{i}.txt")
+    for i in range(1,10):
+        generar_archivo(f"sets/set_largo_{i}.txt")
 
 def generar_grafico_complejidad_teorica(solucion,tiempos,rango):
-
-
-    print("COMPLEJIDAD TEORICA")
-
     name=""
     if solucion == "pl":  
         for r in rango:
